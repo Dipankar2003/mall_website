@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <link rel="stylesheet" href="message.css" />
+  <body>
+    <div class="backg">
+      <section class="braoadcast">
+        <form action="/banner" method="post" enctype="multipart/form-data">
+          <span>Choose a banner/poster</span>
+          <div id="upload">
+            <i class="material-icons" style="font-size: 25px"></i>
+
+            <input type="file" id="myFile" name="upload" accept="image/*" />
+          </div>
+          <br />
+          <div>
+            <input type="submit" value="Submit" id="send" />
+          </div>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>

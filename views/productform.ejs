@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+
+    <section class="form">
+    <div class="container">
+        <div class="title">Product information Form</div>
+        <div class="content">
+          <form action="/save" method="POST" enctype="multipart/form-data">
+            <div class="user-details">
+              <div class="input-box">
+                <span class="details">Product name</span>
+                <input type="text" placeholder="Enter Product name" required name="Product_name">
+              </div>
+              <div class="input-box">
+                <span class="details">Category</span>
+                
+                <select id="cars" name="Category">
+                <option value="All">All</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+                </select>
+             
+              </div>
+              <div class="input-box">
+                <span class="details">Product price</span>
+                <input type="text" placeholder="Enter price" required name="Product_price">
+              </div>
+              <div class="input-box" id="desc">
+                <span class="details">Product description</span>
+              
+                <textarea rows="4" cols="50" placeholder="Enter product description" name="Product_Desc" ></textarea>
+              </div>
+
+              <span >Upload a image</span>
+              <div id="upload">
+                
+
+                <input type="file" id="myFile" name="upload" accept="image/*">
+              </div>
+              
+         
+            <div class="button">
+              <input type="submit" value="Submit">
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <section id="header">
+      <a href="#"><img src="img/logo.png" class="logo" alt="" /></a>
+      <div>
+        <ul id="navbar">
+          <li><a href="/">Home</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a class="active" href="/Register">Register</a></li>
+          <li><a class="active" href="/Message-sending">Message sending</a></li>
+          <!-- <li><a href="/admin">Admin</a></li> -->
+        </ul>
+      </div>
+    </section>
+
+    <section class="form">
+      <div class="container">
+        <div class="title">Registration Form</div>
+        <div class="content">
+          <form action="/upload" method="POST">
+            <div class="user-details">
+              <div class="input-box">
+                <span class="details">First Name</span>
+                <input
+                  type="text"
+                  placeholder="Enter your First name"
+                  required
+                  name="First_name"
+                />
+              </div>
+              <div class="input-box">
+                <span class="details">Last Name</span>
+                <input
+                  type="text"
+                  placeholder="Enter your Last name"
+                  required
+                  name="Last_name"
+                />
+              </div>
+              <div class="input-box">
+                <span class="details">Email</span>
+                <input
+                  type="text"
+                  placeholder="Enter your email"
+                  required
+                  name="Email"
+                />
+              </div>
+              <div class="input-box">
+                <span class="details">Phone Number</span>
+                <input
+                  type="text"
+                  placeholder="Enter your number"
+                  required
+                  name="Phone_number"
+                />
+              </div>
+              <div class="input-box">
+                <span class="details">Date of birth</span>
+                <input
+                  type="text"
+                  placeholder="MM/DD/YYYY"
+                  onfocus="(this.type='date')"
+                  required
+                  name="DOB"
+                />
+              </div>
+              <!-- <div class="input-box">
+                <span class="details"> Password</span>
+                <input type="text" placeholder="Enter your password" required />
+              </div>
+              <div class="input-box">
+                <span class="details">Confirm Password</span>
+                <input
+                  type="text"
+                  placeholder="Confirm your password"
+                  required
+                />
+              </div> -->
+            </div>
+            <!-- <div class="gender-details">
+              <input type="radio" name="gender" id="dot-1" required />
+              <input type="radio" name="gender" id="dot-2" required />
+              <input type="radio" name="gender" id="dot-3" required />
+              <span class="gender-title">Gender</span>
+              <div class="category">
+                <label for="dot-1">
+                  <span class="dot one"></span>
+                  <span class="gender">Male</span>
+                </label>
+                <label for="dot-2">
+                  <span class="dot two"></span>
+                  <span class="gender">Female</span>
+                </label>
+                <label for="dot-3">
+                  <span class="dot three"></span>
+                  <span class="gender">Prefer not to say</span>
+                </label>
+              </div>
+            </div> -->
+            <div class="button">
+              <input type="submit" value="Register" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

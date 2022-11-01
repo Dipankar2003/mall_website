@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="message.css" />
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.png" class="logo" alt=""></a>
+    <div>
+        <ul id="navbar">
+            <li><a  href="/">Home</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/Register">Register</a></li>
+            <!-- <li><a href="/admin">Admin</a></li> -->
+            <!-- <li><a href="/contact_us">Contact us</a></li> -->
+            <li><a class="active" href="/Message-sending" >Message sending</a></li>
+        </ul>
+    </div>
+    
+    </section>
+    <div class="backg">
+       
+    <section class="braoadcast">
+        <form action="/message" method="POST">
+        <div>
+            <span for="bdc">Broadcastng message about offer or discount!</span>
+        </div>
+        <br>
+        <div>
+            <textarea rows="10" cols="50" placeholder="Enter the message"  name="message" ></textarea>
+        </div>
+       <br>
+     <br>
+        <div>
+            <input type="submit" value="submit" id="send">
+        </div>
+    </form>
+    </section>
+
+
+    <section class="birth-message">
+        <form action="/Birth-message" method="post">
+        <div>
+            <label for="bday">Birthday wishes , Offer and Discunts!</label>
+        </div>
+        <br>
+
+        <div>
+            <textarea rows="10" cols="50" placeholder="Enter the message" name="message" ></textarea>
+        </div>
+       <br>     
+     <br>
+        <div>
+            <input type="submit" value="submit" id="send">
+        </div>  
+    </div>
+     
+     </form>
+    </section>
+
+
+
+</body>
+</html>

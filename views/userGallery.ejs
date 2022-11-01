@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <section id="header">
+      <a href="#"><img src="img/logo.png" class="logo" alt="" /></a>
+      <div>
+        <ul id="navbar">
+          <li><a href="/">Home</a></li>
+          <li><a class="active" href="/userGallery">Gallery</a></li>
+          <li><a href="/contact_us">Contact us</a></li>
+          <!-- <li><a href="/Register">Register</a></li> -->
+          <li><a href="/admin">Admin</a></li>
+          <!-- <li><a class="active" href="/Message-sending">Message sending</a></li> -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- <a href="/productform" target="_blank"
+      ><button class="button1">Add product</button></a
+    > -->
+
+    <section id="product1" class="section-p1">
+      <div class="pro-container">
+        <% data1.forEach((out)=>{ %>
+        <div class="pro">
+          <img src="uploads/<%-out.Product_img%>" alt="" />
+          <div class="des">
+            <span class="Product_name"><%=out.Product_name%></span>
+            <h5 class="Product_Desc"><%=out.Product_Desc%></h5>
+            <h4 class="Product_price"><%=out.Product_price%></h4>
+          </div>
+        </div>
+        <%}); %>
+      </div>
+    </section>
+
+    <section id="pagination" class="section-p1">
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#" id="i">&rarr;</a>
+    </section>
+
+    <script>
+      let list = document.querySelectorAll(".list");
+      let itembox = document.querySelectorAll(".itembox");
+
+      for (let i = 0; i < list.length; i++) {
+        list[i].addEventListener("click", function () {
+          for (let j = 0; j < list.length; j++) {
+            list[j].classList.remove("active1");
+          }
+          this.classList.add("active1");
+          let datafilter = this.getAttributes("data-filter");
+
+          for (let k = 0; k < itembox.length; k++) {
+            itembox[k].classList.add("hide");
+
+            if (
+              itembox[k].getAttribute("data-item") == datafilter ||
+              datafilter == "all"
+            ) {
+              itembox[k].classList.add("active1");
+            }
+          }
+        });
+      }
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>

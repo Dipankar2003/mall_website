@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+</head>
+<body>
+
+
+    <section id="header">
+        <a href="#"><img src="img/logo.png" class="logo" alt=""></a>
+    <div>
+        <ul id="navbar">
+            <li><a  href="/">Home</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <!-- <li><a  href="/Register">Register</a></li> -->
+            <li><a class="active" href="/contact_us">Contact us</a></li>
+            <li><a class="active" href="/admin">Admin</a></li>
+        </ul>
+    </div>
+    
+    </section>
+    <section class="admin">
+
+      <div class="admin-container">
+        <header>Admin Login</header>
+        <form  action="/loginOtp" method="post">
+            <div class="inputWithIcon">
+              <input type="text" placeholder="Password" name="Email">
+              <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+            </div>
+            <!-- <div class="inputWithIcon">
+              <input type="text" placeholder="Password" name="Passward">
+              <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
+            </div> -->
+  
+             
+  
+  
+             <div class="button">
+                <div class="inner"></div>
+                
+                <button>LOGIN</button>
+             
+             </div>
+          </form>
+        
+ 
+    
+</body>
+</html>
