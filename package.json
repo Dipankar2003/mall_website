@@ -2,10 +2,11 @@
   "name": "node_crash_course",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "./node_modules/.bin/netlify-lamdba serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
   },
   "author": "Dipankar",
   "license": "ISC",

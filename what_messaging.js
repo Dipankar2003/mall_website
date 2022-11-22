@@ -19,7 +19,9 @@ const message_sending = async (message, res) => {
         } else {
           // qr1.res=res;
           // qr1.qr=qr;
+
           res.render("scan", { qr: qr });
+
           // qrcode.generate(qr, { small: false }).then((qr) => {});
         }
       });
