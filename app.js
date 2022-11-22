@@ -205,8 +205,8 @@ app.post("/Login", async (req, res) => {
   const enterOtp = req.body.passward;
   await Login.find({ Email: enterEmail }).then(async (re) => {
     if (re) {
-      //OTP = Math.floor(Math.random() * 9000)+1000;
-      OTP = 1111;
+      OTP = Math.floor(Math.random() * 9000) + 1000;
+      //OTP = 1111;
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -240,11 +240,17 @@ app.post("/Login", async (req, res) => {
   });
 });
 
-app.post("/loginOtp", (req, res) => {
+app.post("/loginOtp", async (req, res) => {
   let enterOTP = Number(req.body.Email);
   if (enterOTP === OTP) {
-    flag = 1;
-    res.redirect("/");
+    await product().then(async () => {
+      await poster().then(async () => {
+        await banner().then(() => {
+          (allData.data = data), (allData.post = post), (allData.ban = ban);
+          res.render("index", { allData: allData });
+        });
+      });
+    });
   } else {
     console.log(enterOTP);
   }
@@ -388,26 +394,15 @@ app.get("/back", (req, res) => {
 let allData = new Object();
 
 app.get("/", async (req, res) => {
-  if (flag == 0) {
-    await product().then(async () => {
-      await poster().then(async () => {
-        await banner().then(() => {
-          (allData.data = data), (allData.post = post), (allData.ban = ban);
-          res.render("userIndex", { allData: allData });
-        });
+  await product().then(async () => {
+    await poster().then(async () => {
+      await banner().then(() => {
+        (allData.data = data), (allData.post = post), (allData.ban = ban);
+        res.render("userIndex", { allData: allData });
       });
     });
-    //res.render("userIndex", { allData: allData });
-  } else {
-    await product().then(async () => {
-      await poster().then(async () => {
-        await banner().then(() => {
-          (allData.data = data), (allData.post = post), (allData.ban = ban);
-          res.render("index", { allData: allData });
-        });
-      });
-    });
-  }
+  });
+  //res.render("userIndex", { allData: allData });
 });
 app.get("/userGallery", async (req, res) => {
   await product().then(() => {
