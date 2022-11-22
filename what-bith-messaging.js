@@ -1,25 +1,23 @@
 const { Client } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
+const QRCode = require("qrcode");
 //const customerData = require("./info.json");
 const mongoose = require("mongoose");
 const customerData = require("./model/messaging_number");
 //const messageTemplate = require("./message.json");
-
-const message_sending = async (message, res, link) => {
+const message_sending = async (msg, res) => {
   await customerData.find().then((customerData) => {
     const client = new Client();
     client.on("qr", (qr) => {
       //console.log('QR RECEIVED', qr);
-      if (link == 0) {
-        QRCode.toDataURL(qr, { errorCorrectionLevel: "H" }, (err, qr) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.render("scan", { qr });
-          }
-        });
-      }
-      //  qrcode.generate(qr, { small: true });
+      QRCode.toDataURL(qr, { small: true }, (err, qr) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("scan", { qr: qr });
+        }
+      });
+      // qrcode.generate(qr, { small: true });
     });
 
     client.on("ready", () => {
@@ -40,17 +38,18 @@ const message_sending = async (message, res, link) => {
 
         if (month === cMonth && Day === cDay) {
           let text =
-            "Hello " + customerData[i].First_name + ", " + message.message;
+            "Hello " +
+            customerData[i].First_name +
+            ", Happy Birthday " +
+            msg.message;
           client.sendMessage(chatId, text);
-        } else if (
-          customerData[i]["Birth Month"] === cMonth &&
-          customerData[i]["Birth Date"] === cDay + 7
-        ) {
+        } else if (month === cMonth && Day === cDay + 7) {
           let text =
             "Hello " +
             customerData[i].First_name +
             ", " +
-            "Your Birthday is coming";
+            "Your Birthday is coming Next Week, " +
+            msg.message;
           client.sendMessage(chatId, text);
         }
       }

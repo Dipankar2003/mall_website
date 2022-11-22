@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./partials/head.ejs') %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  
 <body>
 
   
-    <section id="header">
-        <a href="#"><img src="img/logo.png" class="logo" alt=""></a>
-    <div>
-        <ul id="navbar">
-            <li><a class="active" href="/">Home</a></li>
-            <li><a href="/userGallery">Gallery</a></li>
-            <li><a href="/contact_us">Contact us</a></li>
-            <!-- <li><a href="/Register">Register</a></li> -->
-            <li><a href="/admin">Admin</a></li>
-            <!-- <li><a class="active" href="/Message-sending" >Message sending</a></li> -->
-        </ul>
-    </div>
-    
+  <section id="header">
+    <a href="#"><img src="img/logo.png" class="logo" alt=""></a>
+
+        <div>
+    <ul id="navbar" class="nav-links">
+      <li><a class="active" href="/">Home</a></li>
+<li><a href="/userGallery">Gallery</a></li>
+<li><a href="/contact_us">Contact us</a></li>
+<!-- <li><a href="/Register">Register</a></li> -->
+<li><a href="/admin">Admin</a></li>
+<!-- <li><a class="active" href="/Message-sending" >Message sending</a></li> -->
+    </ul>
+</div>
+
+<div class="mobile">
+  <i id="bar" class="fas fa-bars"></i>
+</div>
+
+</section>
+
+    <section class="shopimage">
+      <!-- <a href="addslider.html" target="_blank"><button class="button4">Add image</button></a> -->
+     <br><br>
+      <!-- <a href="#" ><button class="button5">Delete image</button></a> -->
+  
     </section>
 
     <section id="shop">
@@ -25,13 +54,18 @@
      
       <div class="slideshow-container">
         <div class="slides_shop"></div>
-        <% allData.post.forEach((out)=>{ %>
-          <div class="mySlides fade">
-              <!-- <div class="numbertext">1 / 3</div> -->
-              <!-- <%- include('./partials/head.ejs') %> -->
-              <img src="uploads/<%-out.Slider_img%>" style="width:100%">
-          </div>
-          <%}); %>
+        <div class="mySlides fade">
+            <!-- <div class="numbertext">1 / 3</div> -->
+            <img src="mywebsite_img/home/shop image 1.jpg" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+            <!-- <div class="numbertext">2 / 3</div> -->
+            <img src="mywebsite_img/home/shop image 3.jpg" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+            <!-- <div class="numbertext">3 / 3</div> -->
+            <img src="mywebsite_img/home/shop image.jpg" style="width:100%">
+        </div>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
@@ -49,55 +83,65 @@
   </div>
 
     </section>
-
+    
 
     
 
 
-<section id="image-slider">
+ 
+
     
-    <!--image slider start-->
-    <div class="slider">
-        <div class="slides">
-          <!--radio buttons start-->
-          <input type="radio" name="radio-btn" id="radio1">
-          <input type="radio" name="radio-btn" id="radio2">
-          <input type="radio" name="radio-btn" id="radio3">
-          <input type="radio" name="radio-btn" id="radio4">
-          
-          <!--radio buttons end-->
-          <!--slide images start-->
-          <% allData.ban.forEach((out)=>{ %>
-            <div class="mySlides fade">
-                <!-- <div class="numbertext">1 / 3</div> -->
-                <!-- <%- include('./partials/head.ejs') %> -->
-                <img src="uploads/<%-out.Banner_img%>" style="width:100%">
-            </div>
-            <%}); %>
-          
-          <!--slide images end-->
-          <!--automatic navigation start-->
-          <div class="navigation-auto">
-            <div class="auto-btn1"></div>
-            <div class="auto-btn2"></div>
-            <div class="auto-btn3"></div>
-            <div class="auto-btn4"></div>
+    <section class="bannerslider">
+      <!-- <a href="/addbanner" target="_blank"><button class="button4">Add image</button></a> -->
+      <div class="slider">
+        <form action="/deleteBanner" method="post">
+         
+       
+        <% allData.ban.forEach((out)=>{ %>
+          <div class="mySlides fade">
+              <!-- <div class="numbertext">1 / 3</div> -->
+              <!-- <%- include('./partials/head.ejs') %> -->
+              <img src="uploads/<%-out.Banner_img%>" style="width:100%">
+              <!-- <form action="/deleteBanner" method="post">
+                <input type="hidden" name="id" value="<%=out._id%>" />
+                <a href="#" target="_blank"
+                  ><button class="button5">Delete Banner</button></a
+                >
+              </form> -->
           </div>
-          <!--automatic navigation end-->
-        </div>
-        <!--manual navigation start-->
-        <div class="navigation-manual">
-          <label for="radio1" class="manual-btn"></label>
-          <label for="radio2" class="manual-btn"></label>
-          <label for="radio3" class="manual-btn"></label>
-          <label for="radio4" class="manual-btn"></label>
-        </div>
-        <!--manual navigation end-->
+          
+                <!-- <input type="hidden" name="id" value="<%=out._id%>" /> -->
+               
+         
+          <%}); %>
+        <!-- <div class="slide">
+          <img src="mywebsite_img/sale offer/offer1.jpg" alt="">
+          </div>
+        <div class="slide">
+          <img src="mywebsite_img/sale offer/offer5.jpg" alt="">
+           </div>
+        <div class="slide">
+          <img src="mywebsite_img/sale offer/offer4.jpg" alt="">
+            </div> -->
+                <!-- <div class="navigation">
+          <i class="fas fa-chevron-left prev-btn"></i>
+          <i class="fas fa-chevron-right next-btn"></i>
+        </div> -->
+        <!-- <div class="navigation-visibility">
+          <div class="slide-icon active"></div>
+          <div class="slide-icon"></div>
+          <div class="slide-icon"></div>
+          <div class="slide-icon"></div>
+          <div class="slide-icon"></div>
+        </div> -->
       </div>
-      <!--image slider end-->
+      <!-- <a href="#" target="_blank" -->
+      <!-- ><button class="button5">Delete Banner</button></a -->
+    >
+  </form>
       
-</section>
-
+    </section>
+   
 
 
 
@@ -119,14 +163,6 @@
   <% } %>
   <%}); %>
   <!-- <div class="pro">
-      <img src="img/products/f1.jpg" alt="">
-      <div class="des">
-          <span>adidas</span>
-          <h5>cartoon astronaut T-shirts</h5>
-          <h4>$78</h4>
-      </div>
-  </div>
-  <div class="pro">
     <img src="img/products/f2.jpg" alt="">
     <div class="des">
         <span>adidas</span>
@@ -208,13 +244,13 @@
     <script src="script.js"></script>
     <script type="text/javascript">
         var counter = 1;
-        setInterval(function(){
+       setInterval(function(){
           document.getElementById('radio' + counter).checked = true;
           counter++;
           if(counter > 4){
             counter = 1;
           }
-        }, 5000);
+       }, 5000);
         </script>
 
 </body>

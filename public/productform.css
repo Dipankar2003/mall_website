@@ -1,0 +1,246 @@
+
+ /* product form */
+ body{
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+
+ }
+ #upload{
+    /* width: 100%; */
+    padding: 12px 20px;
+    margin-top: 5px;
+    /* margin: 8px 0; */
+    box-sizing: border-box;
+    
+    background-color: #fff;
+    color: rgb(10, 9, 9);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    /* border-bottom-width: 2px */
+  }
+  
+  textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+
+  .custom-select {
+    position: relative;
+    display: inline-block;
+    font-size: 1.3vw;
+    color: rgb(2, 1, 1);
+    margin-top: 25px;
+    
+  }
+  
+  .custom-select select {
+    display: block;
+    width: 50vw;
+    min-height: 45px;
+    background: #fff;
+    border-radius: 3px;
+    border: 2px solid #2196F3;
+    outline: none;
+    padding: 0 20px 0 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+  }
+
+  .custom-select::after {
+    content: '';
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+    border-top-color: #222;
+    display: inline-block;
+    border-radius: 2px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+  
+  .custom-select .selector-options {
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    background: #11436b;
+    color: #fff;
+    border-radius: 4px;
+    z-index: 1;
+    width: 96%;
+    position: absolute;
+    left: 2%;
+    top: 35%;
+  }
+  
+  
+
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.form{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.container{
+  max-width: 800px;
+  width: 100%;
+  margin: 7vw;
+  margin-left: 7vw;
+  background-color: rgb(223, 210, 219);
+  padding: 16px 21px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.19);
+  
+}
+.container .title{
+  font-size: 25px;
+  font-weight: bold;
+  position: relative;
+  font-family: sans-serif;
+  color: #000;
+  background-color: #b68fc5;
+  padding: 10px 10px 20px 20px;
+}
+.container .title::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 138px;
+  border-radius: 10px;
+  /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
+}
+.content form .user-details{
+  /* display: flex; */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #000;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #9b59b6;
+}
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+ }
+ form .gender{
+  color: #000;
+ }
+ form .category{
+   display: flex;
+   width: 80%;
+   margin: 14px 0 ;
+   justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+ }
+ form .category label .dot{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #b36bab;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+ #dot-1:checked ~ .category label .one,
+ #dot-2:checked ~ .category label .two,
+ #dot-3:checked ~ .category label .three{
+   background: #9b59b6;
+   border-color: #302929;
+ }
+ form input[type="radio"]{
+   display: none;
+ }
+ form .button{
+   height: 45px;
+   margin: 35px 0
+ }
+ form .button input{
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+ }
+ form .button input:hover{
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  }
+ @media(max-width: 584px){
+ .container{
+  max-width: 100%;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
+}
+

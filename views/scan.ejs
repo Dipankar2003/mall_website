@@ -13,13 +13,18 @@
   </head>
 
   <body>
-    <div>
-      <img src="<%=qr%>" alt="qrcode" />
-    </div>
+    <form action="/back" method="get">
+      <div>
+        <img src="<%=qr%>" alt="qrcode" />
+      </div>
+      <div class="button">
+        <input type="submit" value="Back" />
+      </div>
+    </form>
     <script>
-      setInterval(function () {
-        location.reload();
-      }, 7000);
+      // setInterval(function () {
+      //   location.reload();
+      // }, 7000);
     </script>
   </body>
 </html>

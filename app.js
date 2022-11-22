@@ -26,7 +26,7 @@ let userData = new Object();
 
 const app = express();
 app.use(bodyParser.json());
-//app.use("/", what_message);
+
 //connect database
 //const DBuri = `mongodb+srv://${username}:${password}@nodepractice.bpsc6bg.mongodb.net/${database_name}?retryWrites=true&w=majority`;
 const DBuri = `mongodb://${username}:${password}@ac-j3im6lj-shard-00-00.bpsc6bg.mongodb.net:27017,ac-j3im6lj-shard-00-01.bpsc6bg.mongodb.net:27017,ac-j3im6lj-shard-00-02.bpsc6bg.mongodb.net:27017/${database_name}?ssl=true&replicaSet=atlas-ymw7xh-shard-0&authSource=admin&retryWrites=true&w=majority`;
@@ -43,7 +43,7 @@ app.use(express.static("public"));
 //middleware to accept data from form
 app.use(express.urlencoded({ extended: true }));
 
-//Uploading customer-data of registration page to database
+//Uploading customer-data of registration page to database Start
 app.post("/upload", (req, res) => {
   const customer_data = new Customer(req.body);
 
@@ -66,6 +66,7 @@ app.post("/upload", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+//Uploading customer-data of registration page to database End
 
 const storage = multer.diskStorage({
   destination: "./public/uploads",
@@ -78,7 +79,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single("upload");
 
-//Saving gallery images to database
+//Saving gallery images to database Start
 app.post("/save", (req, res) => {
   upload(req, res, async (err) => {
     const gallery_data = await new Gallery({
@@ -98,16 +99,18 @@ app.post("/save", (req, res) => {
       .catch((err) => console.log(err));
   });
 });
+//Saving gallery images to database End
 
 let data;
-//Displaying gallery
+//Displaying gallery Start
 const product = async () => {
   data = await Gallery.find();
   data = JSON.stringify(data);
   data = JSON.parse(data);
 };
+//Displaying gallery End
 
-//Deleting product from gallery
+//Deleting product from gallery Start
 app.post("/deleteGallery", (req, res) => {
   console.log(req.body.id);
   Gallery.findOneAndDelete({ _id: req.body.id }).then(() => {
@@ -115,74 +118,86 @@ app.post("/deleteGallery", (req, res) => {
     res.redirect("/gallery");
   });
 });
-let link = 0;
-//Birthday Message sending
-app.post("/Birth-message", async (req, res) => {
-  await Message.findByIdAndUpdate(
-    { _id: "63577333eef14190b39aa210" },
-    { $set: { message: req.body.message } }
-  ).then((msg) => {
-    if (msg) {
-      birth_msg(msg, res, link);
-      // res.redirect("/Message-sending");
-    } else {
-      const msg = new Message({
-        type: "Birthday_msg",
-        message: req.body.message,
-      });
-      birth_msg(msg, res, link);
-      msg
-        .save()
-        .then((result) => {
-          //REDIRECTING TO MESSAGE SENDING FORM PAGE
-          //  res.redirect("/Message-sending");
-        })
-        .catch((err) => console.log(err));
-    }
-  });
-});
+//Deleting product from gallery End
 
-const birth = async (msg, res) => {
-  await Message.findById({ _id: "63577333eef14190b39aa210" }).then((msg) => {
-    birth_msg(msg, res);
-  });
+const birth = async (res) => {
+  await Message.findById({ _id: "63577333eef14190b39aa210" }).then(
+    async (msg1) => {
+      birth_msg(msg1, res);
+    }
+  );
 };
 
-//Discount Message sending
+//Birthday Message sending Start
+app.post("/Birth-message", async (req, res) => {
+  if (req.body.message) {
+    await Message.findByIdAndUpdate(
+      { _id: "63577333eef14190b39aa210" },
+      { $set: { message: req.body.message } }
+    ).then(() => {
+      birth_msg(req.body, res);
+    });
+  } else {
+    await Message.find().then((msg) => {
+      if (msg) {
+        birth(res);
+        // res.redirect("/Message-sending");
+      } else {
+        const msg = new Message({
+          type: "Birthday_msg",
+          message: req.body.message,
+        });
+        birth(res);
+        msg
+          .save()
+          .then((result) => {
+            //REDIRECTING TO MESSAGE SENDING FORM PAGE
+            //  res.redirect("/Message-sending");
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  }
+});
+//Birthday Message sending Start
+
+//Discount Message sending Start
 app.post("/message", async (req, res) => {
   // await Message.find({ type: "Message" }).then(async (msg) => {
 
-  await Message.findByIdAndUpdate(
-    { _id: "6356aa6d5650dc11e99305c6" },
-    { $set: { message: req.body.message } }
-  ).then(async (msg) => {
-    if (msg) {
-      await what_message(req.body, res).then(() => {
-        // res.redirect("/Message-sending");
-      });
-      link = 1;
-      birth(msg, res, link);
-      link = 0;
-    } else {
-      const msg = new Message({
-        type: "Message",
-        message: req.body.message,
-      });
-      what_message(msg, res);
-      link = 1;
-      birth(msg, res, link);
-      link = 0;
-      msg
-        .save()
-        .then((result) => {
-          //REDIRECTING TO MESSAGE SENDING FORM PAGE
-          //res.redirect("/Message-sending");
-        })
-        .catch((err) => console.log(err));
-    }
-  });
+  if (req.body.message) {
+    await Message.findByIdAndUpdate(
+      { _id: "6356aa6d5650dc11e99305c6" },
+      { $set: { message: req.body.message } }
+    ).then(() => {
+      what_message(req.body, res);
+    });
+  } else {
+    await Message.find().then((msg) => {
+      if (msg[0]) {
+        what_message(msg[0], res);
+        // birth(res);
+      } else {
+        const msg = new Message({
+          type: "Message",
+          message: req.body.message,
+        });
+        what_message(msg, res);
+        //birth(res);
+        msg
+          .save()
+          .then((result) => {
+            //REDIRECTING TO MESSAGE SENDING FORM PAGE
+            //res.redirect("/Message-sending");
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  }
 });
+//Discount Message sending End
 
+//Login page start
 let flag = 0;
 let OTP;
 app.post("/Login", async (req, res) => {
@@ -190,7 +205,8 @@ app.post("/Login", async (req, res) => {
   const enterOtp = req.body.passward;
   await Login.find({ Email: enterEmail }).then(async (re) => {
     if (re) {
-      OTP = Math.floor(Math.random() * 9000);
+      //OTP = Math.floor(Math.random() * 9000)+1000;
+      OTP = 1111;
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -233,8 +249,9 @@ app.post("/loginOtp", (req, res) => {
     console.log(enterOTP);
   }
 });
+//Login page end
 
-//Adding Slider to database
+//Adding Slider to database end
 app.post("/slider", (req, res) => {
   upload(req, res, async (err) => {
     const slider_img = await new Slider({
@@ -251,7 +268,9 @@ app.post("/slider", (req, res) => {
       .catch((err) => console.log(err));
   });
 });
-//Deleting Slider
+//Adding slider to database end
+
+//Deleting Slider start
 app.post("/deleteSlider", (req, res) => {
   // console.log(req.body.id);
   Slider.findOneAndDelete({ _id: req.body.id }).then(() => {
@@ -259,8 +278,9 @@ app.post("/deleteSlider", (req, res) => {
     res.redirect("/");
   });
 });
+// Deleting Slider end
 
-//Adding banner
+//Adding banner start
 app.post("/banner", (req, res) => {
   upload(req, res, async (err) => {
     const Banner_img = await new Banner({
@@ -276,7 +296,8 @@ app.post("/banner", (req, res) => {
       .catch((err) => console.log(err));
   });
 });
-//Deleting Banner
+//Adding Banner end
+//Deleting Banner start
 app.post("/deleteBanner", (req, res) => {
   //console.log(req.body.id);
   Banner.findOneAndDelete({ _id: req.body.id }).then(() => {
@@ -284,6 +305,7 @@ app.post("/deleteBanner", (req, res) => {
     res.redirect("/");
   });
 });
+//Deleting Banner end
 let post;
 const poster = async () => {
   post = await Slider.find();
@@ -296,6 +318,41 @@ const banner = async () => {
   ban = JSON.stringify(ban);
   ban = JSON.parse(ban);
 };
+
+//Contact Us form start
+app.post("/contact_us", (req, res) => {
+  let email = req.body.Email;
+  let name = req.body.name;
+  let issue = req.body.message;
+  let transporter1 = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "ddubey10032003@gmail.com",
+      pass: "qcifrzphugnukief",
+    },
+  });
+
+  transporter1.sendMail(
+    {
+      from: email,
+      to: "ddubey10032002@gmail.com",
+      subject: "Issue",
+      text: `I am ${name} my  issue is ${issue}`,
+    },
+    (err, info) => {
+      if (err) {
+        console.log(err);
+        res.redirect("/contact_us");
+      } else {
+        // console.log(OTP);
+        res.redirect("/contact_us");
+        //  res.render("otp");
+      }
+    }
+  );
+});
+//contact us form end
+
 //Navigating among different ejs file in admin panel
 app.get("/gallery", async (req, res) => {
   await product().then(() => {
@@ -308,8 +365,11 @@ app.get("/Register", (req, res) => {
 app.get("/productform", (req, res) => {
   res.render("productform");
 });
-app.get("/Message-sending", (req, res) => {
-  res.render("Message-sending");
+app.get("/Message-sending", async (req, res) => {
+  await Message.find().then((msg) => {
+    console.log(msg);
+    res.render("Message-sending", { msg });
+  });
 });
 app.get("/addslider", async (req, res) => {
   res.render("addslider");
@@ -320,7 +380,9 @@ app.get("/addbanner", (req, res) => {
 app.get("/otp", (req, res) => {
   res.render("otp");
 });
-
+app.get("/back", (req, res) => {
+  res.redirect("/Message-sending");
+});
 //Navigating among different ejs file in user panel
 
 let allData = new Object();
