@@ -26,7 +26,7 @@
 
         <div>
     <ul id="navbar" class="nav-links">
-      <li><a class="active" href="/">Home</a></li>
+      <li><a class="active" href="/home">Home</a></li>
       <li><a href="/gallery">Gallery</a></li>
       <li><a href="/Register">Register</a></li>
       <li><a class="active" href="/Message-sending" >Message sending</a></li>
@@ -48,39 +48,49 @@
 
     <section id="shop">
       
-
      
-      <div class="slideshow-container">
-        <div class="slides_shop"></div>
-        <div class="mySlides fade">
-            <!-- <div class="numbertext">1 / 3</div> -->
-            <img src="mywebsite_img/home/shop image 1.jpg" style="width:100%">
-        </div>
-        <div class="mySlides fade">
-            <!-- <div class="numbertext">2 / 3</div> -->
-            <img src="mywebsite_img/home/shop image 3.jpg" style="width:100%">
-        </div>
-        <div class="mySlides fade">
-            <!-- <div class="numbertext">3 / 3</div> -->
-            <img src="mywebsite_img/home/shop image.jpg" style="width:100%">
-        </div>
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-    <br><br><br>
-  </div>
-  <div id="hero">
-    
-    <h1>Swap Cloth Shop</h1>
-    <h4>Be stylish, be our costomer!</h4>
-    <h4>Find what you’re looking for and more at our shop!</h4>
-    <p>we are here to give you varieties of clothes for men,women,kids,etc. ,so to know more about it visit our gallery section.For knowing different varieties of clothes and exploring more and more
-       please do Visit our shops and get this amazing offers.To get complete information about our shop click on the below button</p>
+      <% var i=2;%>
+       <div class="slideshow-container">
+         <div class="slides_shop"></div>
+         <% for(var i=1;i<=3;i++) {%>
+          
+          <% if(i==1){ %>
+           <div class="mySlides fade">
+             <!-- <div class="numbertext">1 / 3</div> -->
+             <img src="mywebsite_img/home/shop image 2.jpg" style="width:100%">
+         </div>
+         <%}else if(i==2){%>
+          <div class="mySlides fade">
+            
+             <img src="mywebsite_img/home/shop image 3.jpg" style="width:100%">
+         </div>
+        <% }else{ %>
+         <div class="mySlides fade">
+           
+             <img src="mywebsite_img/home/shop image.jpg" style="width:100%">
+         </div>
+         <%}%>
+         
+         <%}%>
+        
+        
+         <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a> -->
+         <!-- <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
+     </div>
+     <br><br><br>
+   </div>
+   <div id="hero">
+     
+     <h1>Swap Cloth Shop</h1>
+     <h4>Be stylish, be our costomer!</h4>
+     <h4>Find what you’re looking for and more at our shop!</h4>
+     <p>we are here to give you varieties of clothes for men,women,kids,etc. ,so to know more about it visit our gallery section.For knowing different varieties of clothes and exploring more and more
+        please do Visit our shops and get this amazing offers.To get complete information about our shop click on the below button</p>
+  
+     <!-- <button>About us</button> -->
+   </div>
  
-    <button>About us</button>
-  </div>
-
-    </section>
+     </section>
     
 
     
@@ -96,42 +106,27 @@
          
        
         <% allData.ban.forEach((out)=>{ %>
-          <div class="mySlides fade">
-              <!-- <div class="numbertext">1 / 3</div> -->
-              <!-- <%- include('./partials/head.ejs') %> -->
-              <img src="uploads/<%-out.Banner_img%>" style="width:100%">
-              <!-- <form action="/deleteBanner" method="post">
-                <input type="hidden" name="id" value="<%=out._id%>" />
-                <a href="#" target="_blank"
-                  ><button class="button5">Delete Banner</button></a
-                >
-              </form> -->
-          </div>
+          <input type="hidden" name="id" value="<%=out._id%>" />
+          <div class="slide">
+            <img src="uploads/<%-out.Banner_img%>" alt="">
+            </div>
           
-                <input type="hidden" name="id" value="<%=out._id%>" />
+              
                
          
           <%}); %>
-        <!-- <div class="slide">
-          <img src="mywebsite_img/sale offer/offer1.jpg" alt="">
+          <div class="navigation">
+            <i class="fas fa-chevron-left prev-btn"></i>
+            <i class="fas fa-chevron-right next-btn"></i>
           </div>
-        <div class="slide">
-          <img src="mywebsite_img/sale offer/offer5.jpg" alt="">
-           </div>
-        <div class="slide">
-          <img src="mywebsite_img/sale offer/offer4.jpg" alt="">
-            </div> -->
-                <!-- <div class="navigation">
-          <i class="fas fa-chevron-left prev-btn"></i>
-          <i class="fas fa-chevron-right next-btn"></i>
-        </div> -->
-        <!-- <div class="navigation-visibility">
-          <div class="slide-icon active"></div>
-          <div class="slide-icon"></div>
-          <div class="slide-icon"></div>
-          <div class="slide-icon"></div>
-          <div class="slide-icon"></div>
-        </div> -->
+          <div class="navigation-visibility">
+            <div class="slide-icon active"></div>
+            <div class="slide-icon"></div>
+            <div class="slide-icon"></div>
+            <div class="slide-icon"></div>
+            <div class="slide-icon"></div>
+          </div>
+        </div>
       </div>
       <a href="#" target="_blank"
       ><button class="button5">Delete Banner</button></a
@@ -240,6 +235,7 @@
   
 
     <script src="script.js"></script>
+    <script src="slider.js"></script>  
     <script type="text/javascript">
         var counter = 1;
         setInterval(function(){

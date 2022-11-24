@@ -214,24 +214,28 @@ app.post("/Login", async (req, res) => {
           pass: "qcifrzphugnukief",
         },
       });
-
-      transporter.sendMail(
-        {
-          from: "ddubey10032003@gmail.com",
-          to: "ddubey10032002@gmail.com",
-          subject: "testing",
-          text: `${OTP}`,
-        },
-        (err, info) => {
-          if (err) {
-            console.log(err);
-            res.redirect("/admin");
-          } else {
-            console.log(OTP);
-            res.render("otp");
+      if (enterEmail == "ddubey10032002@gmail.com") {
+        transporter.sendMail(
+          {
+            from: "ddubey10032003@gmail.com",
+            to: "ddubey10032002@gmail.com",
+            subject: "testing",
+            text: `${OTP}`,
+          },
+          (err, info) => {
+            if (err) {
+              console.log(err);
+              res.redirect("/admin");
+            } else {
+              console.log(OTP);
+              res.render("otp");
+            }
           }
-        }
-      );
+        );
+      } else {
+        res.redirect("/admin");
+        console.log("enter correct email");
+      }
 
       // });
     } else {
@@ -240,17 +244,18 @@ app.post("/Login", async (req, res) => {
   });
 });
 
-app.post("/loginOtp", async (req, res) => {
+app.post("/loginOtp", (req, res) => {
   let enterOTP = Number(req.body.Email);
   if (enterOTP === OTP) {
-    await product().then(async () => {
-      await poster().then(async () => {
-        await banner().then(() => {
-          (allData.data = data), (allData.post = post), (allData.ban = ban);
-          res.render("index", { allData: allData });
-        });
-      });
-    });
+    res.redirect("/home");
+    // await product().then(async () => {
+    //   await poster().then(async () => {
+    //     await banner().then(() => {
+    //       (allData.data = data), (allData.post = post), (allData.ban = ban);
+    //       res.render("index", { allData: allData });
+    //     });
+    //   });
+    // });
   } else {
     console.log(enterOTP);
   }
@@ -308,7 +313,7 @@ app.post("/deleteBanner", (req, res) => {
   //console.log(req.body.id);
   Banner.findOneAndDelete({ _id: req.body.id }).then(() => {
     console.log("deleted banner");
-    res.redirect("/");
+    res.redirect("/home");
   });
 });
 //Deleting Banner end
@@ -390,7 +395,16 @@ app.get("/back", (req, res) => {
   res.redirect("/Message-sending");
 });
 //Navigating among different ejs file in user panel
-
+app.get("/home", async (req, res) => {
+  await product().then(async () => {
+    await poster().then(async () => {
+      await banner().then(() => {
+        (allData.data = data), (allData.post = post), (allData.ban = ban);
+        res.render("index", { allData: allData });
+      });
+    });
+  });
+});
 let allData = new Object();
 
 app.get("/", async (req, res) => {
