@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/netlify-lamdba serve src",
-    "build": "./node_modules/.bin/netlify-lambda build src"
+    "build": "node app.js"
   },
   "author": "Dipankar",
   "license": "ISC",
